@@ -28,7 +28,7 @@ When using unencrypted HTTP, use `Digest` authentication (instead of `Basic`) to
 To make sure your data doesn't get deleted, you'll probably want to create a persistent storage volume (`-v vol-webdav:/var/lib/dav`) or bind mount a directory (`-v /path/to/directory:/var/lib/dav`):
 
 ```
-docker run --restart always -v /srv/dav:/var/lib/dav \
+docker run --restart always -v /srv/dav:/var/lib/dav/data \
     -e AUTH_TYPE=Digest -e USERNAME=alice -e PASSWORD=secret1234 \
     --publish 80:80 -d bytemark/webdav
 
@@ -49,7 +49,7 @@ services:
       USERNAME: alice
       PASSWORD: secret1234
     volumes:
-      - /srv/dav:/var/lib/dav
+      - /srv/dav:/var/lib/dav/data
 
 ```
 ### Secure WebDAV with SSL
